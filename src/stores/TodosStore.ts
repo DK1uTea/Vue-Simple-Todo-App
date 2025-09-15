@@ -42,7 +42,7 @@ export const useTodosStore: StoreDefinition<
         const newTodo = {
           id: uuidv4(),
           name: newTodoName,
-          startedDate: dayjs().format("DD/MM/YYYY"),
+          startedDate: dayjs().format("DD/MM/YYYY HH:mm:ss"),
           isCompleted: false,
         }
         this.todoList = [...this.todoList, newTodo]
