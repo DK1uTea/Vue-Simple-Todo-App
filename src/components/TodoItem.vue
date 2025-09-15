@@ -1,14 +1,15 @@
 <script lang="ts" setup>
-import type { Todo } from "@/App.vue";
+import { useTodosStore, type Todo } from "@/stores/TodosStore";
 import { cn } from "@/utils/helper";
 
 interface TodoItemProps {
   data: Todo;
-  removeTodo: (id: string) => void;
-  toggleCompleted: (id: string) => void;
 }
 
 const props = defineProps<TodoItemProps>();
+
+const todosStore = useTodosStore();
+const {removeTodo, toggleCompleted} = todosStore;
 </script>
 
 <template>
@@ -26,7 +27,7 @@ const props = defineProps<TodoItemProps>();
       class="h-7 w-7"
       type="checkbox"
       :checked="props.data.isCompleted"
-      @change="props.toggleCompleted(String(props.data.id))"
+      @change="toggleCompleted(String(props.data.id))"
     />
     <div class="flex flex-col gap-1 flex-grow justify-center items-start">
       <span
@@ -37,7 +38,7 @@ const props = defineProps<TodoItemProps>();
     </div>
     <button
       class="bg-red-400 text-white text-center px-3 py-2 rounded-full"
-      @click="props.removeTodo(String(props.data.id))"
+      @click="removeTodo(String(props.data.id))"
     >
       Remove
     </button>
