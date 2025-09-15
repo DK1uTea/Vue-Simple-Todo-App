@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { useSpinnerStore } from "@/stores/SpinnerStore";
 import { cn } from "@/utils/helper";
+import { storeToRefs } from "pinia";
 
-interface LoadingSpinnerProps {
-  message?: string;
-}
-const props = defineProps<LoadingSpinnerProps>();
+const spinnerStore = useSpinnerStore();
+const { message } = storeToRefs(spinnerStore);
 </script>
 
 <template>
@@ -23,7 +23,7 @@ const props = defineProps<LoadingSpinnerProps>();
           )
         "
       ></span>
-      <span class="mr-4 text-3xl text-white">{{ props.message }}</span>
+      <span class="mr-4 text-3xl text-white">{{ message }}</span>
     </div>
   </div>
 </template>

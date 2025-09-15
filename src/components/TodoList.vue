@@ -1,25 +1,15 @@
 <script setup lang="ts">
-import type { Todo } from "@/App.vue";
+
+import { useTodosStore, type Todo } from "@/stores/TodosStore";
 import TodoItem from "./TodoItem.vue";
+import { storeToRefs } from "pinia";
 
-interface TodoListProps {
-  data: Todo[];
-  removeTodo: (id: string) => void;
-  toggleCompleted: (id: string) => void;
-}
-
-const props = defineProps<TodoListProps>();
+const todosStore = useTodosStore();
+const {todoList} = storeToRefs(todosStore);
 </script>
 
 <template>
-  <div
-    class="w-full flex flex-col gap-3 items-center justify-center"
-    v-for="todo in props.data"
-  >
-    <TodoItem
-      :data="todo"
-      :removeTodo="props.removeTodo"
-      :toggleCompleted="props.toggleCompleted"
-    />
+  <div class="w-full flex flex-col gap-3 items-center justify-center">
+    <TodoItem v-for="todo in todoList" :key="String(todo.id)" :data="todo" />
   </div>
 </template>
