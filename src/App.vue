@@ -66,12 +66,22 @@ watch(
           type="text"
           placeholder="What magical thing will you do today?"
           v-model="newTodoName"
-          @keyup.enter="newTodoName.trim() && addTodo(newTodoName.trim())"
+          @keyup.enter="
+            () => {
+              newTodoName.trim() && addTodo(newTodoName.trim());
+              newTodoName = '';
+            }
+          "
         />
         <button
           class="w-[15%] text-white text-center bg-[#cd22a0] border rounded-full p-2.5 disabled:cursor-not-allowed disabled:bg-[#a1a1a1] flex items-center justify-center"
           :disabled="newTodoName.trim() === ''"
-          @click="addTodo(newTodoName.trim())"
+          @click="
+            () => {
+              newTodoName.trim() && addTodo(newTodoName.trim());
+              newTodoName = '';
+            }
+          "
         >
           <span class="hidden md:inline">Add</span>
           <IconPlus class="inline md:hidden" />
