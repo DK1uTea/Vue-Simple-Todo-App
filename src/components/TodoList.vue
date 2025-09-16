@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
-import { useTodosStore, type Todo } from "@/stores/TodosStore";
-import TodoItem from "./TodoItem.vue";
-import { storeToRefs } from "pinia";
+import { type Todo } from "@/stores/TodosStore";
 import CompletedList from "./CompletedList.vue";
 import InProgressList from "./InProgressList.vue";
 
@@ -12,9 +10,6 @@ interface TodoListProps {
 }
 
 const props = defineProps<TodoListProps>();
-
-const todosStore = useTodosStore();
-const {todoList} = storeToRefs(todosStore);
 </script>
 
 <template>

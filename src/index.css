@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ===== Global Reset & Base Styles ===== */
+
+/* Reset margins, paddings, borders */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base HTML & Body */
+html {
+  font-size: 100%; /* 16px = 1rem */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  background-color: #f9f9f9;
+  color: #222;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0070f3; /* adjust to theme */
+}
+
+/* Images & Media */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Lists */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Inputs, Buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Forms */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #0070f3;
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar but allow scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f263b2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ed1f75;
+}
