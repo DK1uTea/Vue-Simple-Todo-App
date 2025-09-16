@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import TodoList from "./components/TodoList.vue";
 import { cn } from "./utils/helper";
 
@@ -35,6 +35,14 @@ onMounted(async () => {
   }
 });
 
+const filteredInProgressTodoList = computed(() => {
+  return todoList.value.filter(todo => !todo.isCompleted);
+});
+
+const filteredCompletedTodoList = computed(() => {
+  return todoList.value.filter(todo => todo.isCompleted);
+});
+
 onUnmounted(() => {
   localStorage.setItem("todoList", JSON.stringify(todoList.value));
 });
@@ -50,11 +58,11 @@ watch(
 </script>
 
 <template>
-  <div :class="cn('p-4 min-h-[100vh] bg-[#fceaf6] flex items-center justify-center')">
+  <div :class="cn('p-4 min-h-[100vh] bg-[#fceaf6] flex items-start justify-center')">
     <div
       :class="
         cn(
-          'flex flex-col items-center min-h-[45rem] w-full md:w-[95%] lg:w-[80%] xl:w-[60%] gap-8'
+          'flex flex-col items-center h-[90%] w-full md:w-[95%] lg:w-[80%] xl:w-[60%] gap-8'
         )
       "
     >
@@ -87,7 +95,11 @@ watch(
           <IconPlus class="inline md:hidden" />
         </button>
       </div>
-      <TodoList v-if="todoList.length > 0" />
+      <TodoList
+        :inProgressData="filteredInProgressTodoList"
+        :completedData="filteredCompletedTodoList"
+        v-if="todoList.length > 0"
+      />
       <NoDataNoti v-if="isLoading === false && todoList.length === 0" />
     </div>
   </div>
