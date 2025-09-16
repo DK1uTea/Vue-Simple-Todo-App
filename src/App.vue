@@ -36,11 +36,11 @@ onMounted(async () => {
 });
 
 const filteredInProgressTodoList = computed(() => {
-  return todoList.value.filter(todo => !todo.isCompleted);
+  return todoList.value.filter(todo => !todo.isCompleted).sort((a, b) => a.startedDate.localeCompare(b.startedDate));
 });
 
 const filteredCompletedTodoList = computed(() => {
-  return todoList.value.filter(todo => todo.isCompleted);
+  return todoList.value.filter(todo => todo.isCompleted && todo.completedAt).sort((a, b) => (a.completedAt ?? "").localeCompare(b.completedAt ?? ""));
 });
 
 onUnmounted(() => {

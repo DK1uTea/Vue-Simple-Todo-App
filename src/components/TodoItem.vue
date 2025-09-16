@@ -34,7 +34,14 @@ const {removeTodo, toggleCompleted} = todosStore;
         :class="cn('text-[14px] font-bold', props.data.isCompleted ? 'line-through' : '')"
         >{{ props.data.name }}</span
       >
-      <span class="text-[#a1a1a1] text-[12px]">{{ props.data.startedDate }}</span>
+      <span v-if="!props.data.isCompleted" class="text-[#325ea8] text-[12px]"
+        >Started Date: {{ props.data.startedDate }}</span
+      >
+      <span
+        v-if="props.data.isCompleted && props.data.completedAt"
+        class="text-[#32a852] text-[12px]"
+        >Completed Date: {{ props.data.completedAt }}</span
+      >
     </div>
     <button
       class="bg-red-400 text-white text-center px-3 py-2 rounded-full"

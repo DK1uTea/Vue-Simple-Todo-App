@@ -9,6 +9,7 @@ export type Todo = {
   name: string;
   startedDate: string;
   isCompleted: boolean;
+  completedAt?: string;
 };
 
 interface TodosState {
@@ -72,6 +73,7 @@ export const useTodosStore: StoreDefinition<
         this.todoList = this.todoList.map(todo => {
           if (todo.id === id) {
             todo.isCompleted = !todo.isCompleted
+            todo.completedAt ? todo.completedAt = "" : todo.completedAt = dayjs().format("DD/MM/YYYY HH:mm:ss")
           }
           return todo
         })
